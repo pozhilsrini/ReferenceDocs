@@ -1,0 +1,35 @@
+html, body {
+  margin: 0;
+  height: 100%
+}
+
+/*Rectangle bar class styling*/
+
+.bar {
+  fill: #0080FF
+}
+
+.bar:hover {
+  fill: #003366
+}
+
+/*Text class styling*/
+
+.text {
+  fill: white;
+  font-family: sans-serif
+}
+
+
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}

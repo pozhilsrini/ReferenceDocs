@@ -1,0 +1,23 @@
+
+Nginx Load Balancing — Advanced Configuration
+https://futurestud.io/tutorials/nginx-load-balancing-advanced-configuration
+
+Using nginx as HTTP load balancer
+http://nginx.org/en/docs/http/load_balancing.html
+
+Use Nginx as a Front-end Proxy and Software Load Balancer
+https://www.linode.com/docs/uptime/loadbalancing/use-nginx-as-a-front-end-proxy-and-software-load-balancer
+
+Choosing an NGINX Plus Load‑Balancing Technique
+https://www.nginx.com/blog/choosing-nginx-plus-load-balancing-techniques/
+
+Personalise the Google URL shortening service with your own domain
+http://www.createdbypete.com/articles/personalise-the-google-url-shortening-service-with-your-own-domain/
+
+
+Which software load balancer is better: HAProxy or nginx?
+https://www.quora.com/Which-software-load-balancer-is-better-HAProxy-or-nginx
+https://github.com/yaoweibin/nginx_upstream_check_module
+
+How To Set Up Nginx Load Balancing with SSL Termination
+https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-load-balancing-with-ssl-termination

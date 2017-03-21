@@ -1,0 +1,22 @@
+       
+how to install nginx server and php file enable 
+
+ref this link
+https://in.godaddy.com/help/build-a-lemp-stack-linux-nginx-mysql-php-centos-7-17349
+
+       sudo yum install nginx
+  247  sudo systemctl start nginx.service
+  248  sudo systemctl enable nginx.service
+  249  sudo yum install php php-mysql php-fpm
+  250  sudo yum install php70w php70w-fpm
+  251  sudo vim /etc/php.ini
+  252  sudo vim /etc/php-fpm.d/www.conf
+  253  sudo systemctl restart php-fpm
+  254  sudo chmod 666 /run/php-fpm/php-fpm.sock
+  255  sudo chown nginx:nginx /run/php-fpm/php-fpm.sock
+  256  sudo systemctl restart php-fpm
+  257  sudo vim /etc/nginx/nginx.conf
+  258  sudo vim /etc/nginx/default.d/default.conf
+  259  sudo systemctl restart nginx
+  260  sudo vim /usr/share/nginx/html/info.php
+

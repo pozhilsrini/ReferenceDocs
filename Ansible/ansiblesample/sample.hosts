@@ -1,0 +1,13 @@
+#sample.hosts
+
+
+[dbserver1]
+192.168.0.51 
+
+
+[dbservers:children]
+dbserver1
+
+[allservers:children]
+dbservers
+

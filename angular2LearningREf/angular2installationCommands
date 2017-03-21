@@ -1,0 +1,49 @@
+angular2 typescript installation
+upgrade the nvm using below command
+its very easy to install node and npm
+nvm install 6
+nvm use 6.9.4
+nvm alias default 6.9.4
+nvm ls
+
+npm install -g gulp typings
+
+angular2working project gulp
+https://github.com/smmorneau/tour-of-heroes
+
+
+angular2working project grunt
+https://github.com/tzi/angular2-starter
+
+ref installing nvm
+https://github.com/creationix/nvm
+
+library explanation
+http://blog.scottlogic.com/2015/12/24/creating-an-angular-2-build.html
+
+
+coueses:
+https://angular-university.io/course/getting-started-with-angular2
+
+ultimate angular2 ref usinig angular-cli
+https://www.sitepoint.com/ultimate-angular-cli-reference/
+
+https://github.com/AngularClass/angular2-webpack-starter
+
+http://developer.telerik.com/featured/super-fast-setup-angular-2-components-component-router/
+https://github.com/toddmotto/superfast-angular-2
+
+https://github.com/TheLarkInn/angular2-template-loader#how-does-it-work
+http://blog.sodhanalibrary.com/2016/10/angular2-project-setup-with-webpack-for.html#.WI8aaXV95CU
+https://github.com/thegreenhouseio/angular2-webpack-seed
+http://stackoverflow.com/questions/39124342/webpack-angular-2-rc5-components-not-rendering-in-production-build
+http://stackoverflow.com/questions/37172928/angular-cli-server-how-to-proxy-api-requests-to-another-server
+https://scotch.io/tutorials/creating-your-first-angular-2-components
+http://plnkr.co/edit/NZuJ42Y0lZaSn1CrxSjI?p=preview
+https://angular.io/docs/ts/latest/tutorial/toh-pt3.html
+https://appendto.com/2016/09/building-nested-components-using-angular-2/?nabt=0&utm_referrer=https%3A%2F%2Fwww.google.co.in%2F
+http://stackoverflow.com/questions/32680244/directive-v-s-component-in-angular2
+https://www.sitepoint.com/angular-2-tutorial/
+https://dzone.com/articles/getting-started-and-testing-with-angular-cli-and-angular-2-rc5-part-1
+https://angular-2-training-book.rangle.io/handout/observables/using_observables.html
+

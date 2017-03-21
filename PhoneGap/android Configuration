@@ -1,0 +1,33 @@
+
+phonegap app ref
+https://github.com/dsimard/grunt-angular-phonegap-example
+
+
+
+how to enable usb debugging options 
+
+for all mobiles and tabs
+go to settings -> aboutPhone -> 10 times click on build number(if u are doing right way after clicking 10 times it will show toast message u are developer now)
+
+-> press back button --> then only u can see developer options --> click developer options --> enable usb debugging
+
+
+
+how to installed needed sdk through android studio
+
+this is very improtant for running min and max android versions 
+<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="23" />
+
+andriod studio itself
+goto Settings --> appearance & behaviour --> system setting --> androidsdk -->
+
+then open dialog window
+
+here itself see the android sdk location and see below all the installed and uninstalled versions.
+
+here u want to install needed versions.
+here have one more options launch standalone SDK manager when click on that it will show clear intsalling versions of android.
+
+after installed build the application.
+
+

@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  user: omoto 
+  sudo: True
+  gather_facts: False
+ 
+  tasks:
+
+     - name: add nginx repository
+       action: apt_repository repo='ppa:nginx/stable'
+
+     
+     - name: install nginx 
+       action: apt pkg=nginx state=present
+       notify:
+       - restart nginx
+ 
+     - name: write config file sites-available/default
+       action: template src=templates/nginx.j2 dest=/etc/nginx/sites-available/default backup=yes
+       notify:
+       - restart nginx
+ 
+  handlers:
+     - name: restart nginx
+       action: service name=nginx state=restarted

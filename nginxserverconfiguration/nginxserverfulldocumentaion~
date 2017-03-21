@@ -1,0 +1,67 @@
+create a file with root user
+
+vim /etc/yum.repos.d/nginx.repo
+
+copy the nginx source pakage and past into the file
+
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+
+ref:https://www.nginx.com/resources/wiki/start/topics/tutorials/install/
+
+then do yum update
+
+install nginx
+yum -y install nginx
+
+start nginx service 
+service nginx start
+
+root@test4 azureuser]# systemctl status nginx.service
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+   Active: failed (Result: exit-code) since Wed 2016-10-12 13:39:32 IST; 10s ago
+     Docs: http://nginx.org/en/docs/
+  Process: 25014 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=1/FAILURE)
+  Process: 25012 ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+
+Oct 12 13:39:29 test4 nginx[25014]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Oct 12 13:39:30 test4 nginx[25014]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Oct 12 13:39:30 test4 nginx[25014]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Oct 12 13:39:31 test4 nginx[25014]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Oct 12 13:39:31 test4 nginx[25014]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Oct 12 13:39:32 test4 nginx[25014]: nginx: [emerg] still could not bind()
+Oct 12 13:39:32 test4 systemd[1]: nginx.service: control process exited, code=exited status=1
+Oct 12 13:39:32 test4 systemd[1]: Failed to start nginx - high performance web server.
+Oct 12 13:39:32 test4 systemd[1]: Unit nginx.service entered failed state.
+
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+
+nginx header cache ref
+https://gist.github.com/facelordgists/5558959
+gzip conf nginx
+https://github.com/h5bp/server-configs-nginx/blob/master/nginx.conf
+https://github.com/catap/ngx_http_gunzip_filter_module 
+https://github.com/darktable/html5-boilerplate-server-configs/blob/master/nginx.conf
+
+
+Build ngx_pagespeed From Source
+
+Automated Install problem
+
+To automatically install dependencies and build the latest mainline version of nginx with the latest stable version of ngx_pagespeed, run:
+
+bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
+     --nginx-version latest
+
+
+https://serversforhackers.com/compiling-third-party-modules-into-nginx
+
+https://www.linode.com/docs/websites/nginx/configure-nginx-for-optimized-performance
+
+
+

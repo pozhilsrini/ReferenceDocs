@@ -1,0 +1,26 @@
+social media code genrataor ref
+http://donordigital.com/services/socialshare/
+
+facebook share
+https://www.facebook.com/dialog/feed?app_id=184683071273&link=http://www.insert-url-to-share-here.com&picture=http://omotostorage.blob.core.windows.net/images/kairali-logo.png&name=This is a Sample Title&caption=&description=angular-easyfb is an AngularJS module wrapping Facebook SDK. Facebook integration in AngularJS made easy! Please try it and feel free to give feedbacks.&redirect_uri=http://www.facebook.com
+
+twitter
+http://twitter.com/intent/tweet?text=testing command
+
+
+https://www.facebook.com/dialog/share?app_id=184683071273&link=http://www.insert-url-to-share-here.com&picture=http://omotostorage.blob.core.windows.net/images/kairali-logo.png&Title=This is a Sample Title&caption=&description=angular-easyfb is an AngularJS module wrapping Facebook SDK. Facebook integration in AngularJS made easy! Please try it and feel free to give feedbacks.&redirect_uri=http://www.facebook.com
+
+
+
+https://www.facebook.com/v2.6/dialog/share?app_id=619063721608671&description=%20says%20%20%27%27very%20happy!%20thanks%20for%20the%20wonderful%20service.%27%27&display=popup&e2e=%7B%7D&link=http%3A%2F%2Ffnp.com&locale=en_US&mobile_iframe=false&name=Jeannette%20Weeks&next=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FD6ZfFsLEB4F.js%3Fversion%3D42%23cb%3Dfe90f7c40df894%26domain%3Dtest4.omoto.io%26origin%3Dhttp%253A%252F%252Ftest4.omoto.io%252Ff1ecdff59925894%26relation%3Dopener%26frame%3Df1d37ae956d34b%26result%3D%2522xxRESULTTOKENxx%2522&picture=http%3A%2F%2Fomotostorage.blob.core.windows.net%2Fomotoimages%2FfnpLogo_socialshare.png&href=srini&sdk=joey&version=v2.6
+
+
+
+https://www.facebook.com/v2.6/dialog/share?app_id=619063721608671&description=%20says%20%20%27%27very%20happy!%20thanks%20for%20the%20wonderful%20service.%27%27&display=popup&e2e=%7B%7D&link=http%3A%2F%2Ffnp.com&locale=en_US&mobile_iframe=false&title=Jeannette%20Weeks&next=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FD6ZfFsLEB4F.js%3Fversion%3D42%23cb%3Dfe90f7c40df894%26domain%3Dtest4.omoto.io%26origin%3Dhttp%253A%252F%252Ftest4.omoto.io%252Ff1ecdff59925894%26relation%3Dopener%26frame%3Df1d37ae956d34b%26result%3D%2522xxRESULTTOKENxx%2522&picture=http%3A%2F%2Fomotostorage.blob.core.windows.net%2Fomotoimages%2FfnpLogo_socialshare.png&href=www.fnp.com&sdk=joey&version=v2.6
+
+
+
+https://www.facebook.com/sharer/sharer.php?u=http://angularjs.jqueryrain.com/easyfb-angularjs-facebook-javascript-sdk/&t=Easyfb+%3A+AngularJS+%26+Facebook+JavaScript+SDK
+
+share dialog working
+https://www.facebook.com/dialog/share?app_id=184683071273&href=http://www.insert-url-to-share-here.com&picture=http://omotostorage.blob.core.windows.net/images/kairali-logo.png&title=This%20is%20a%20Sample%20Title&caption=&description=angular-easyfb%20is%20an%20AngularJS%20module%20wrapping%20Facebook%20SDK.%20Facebook%20integration%20in%20AngularJS%20made%20easy!%20Please%20try%20it%20and%20feel%20free%20to%20give%20feedbacks.&redirect_uri=http://www.facebook.com

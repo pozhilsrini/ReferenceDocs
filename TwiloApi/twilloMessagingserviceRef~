@@ -1,0 +1,14 @@
+https://www.twilio.com/docs/api/rest/sending-messages#messaging-services
+
+https://twilio.github.io/twilio-node/
+
+curl -G https://ip-messaging.twilio.com/v1/Services \
+    -u 'AC75f72218818ebc57fa6fdd041408ec03:9b956472f00fe3c77485a5e1dc16d352'
+
+
+curl -X POST 'https://api.twilio.com/2010-04-01/Accounts/AC75f72218818ebc57fa6fdd041408ec03/Messages.json' \
+--data-urlencode 'To=+919743094041'  \
+--data-urlencode 'From=+918867163789'  \
+--data-urlencode 'Body=This is the ship that made the Kessel Run in fourteen parsecs?'  \
+-d 'MediaUrl=https://c1.staticflickr.com/3/2899/14341091933_1e92e62d12_b.jpg' \
+-u AC75f72218818ebc57fa6fdd041408ec03:9b956472f00fe3c77485a5e1dc16d352

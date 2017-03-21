@@ -1,0 +1,116 @@
+http://www.sql-join.com/
+https://www.quora.com/How-can-I-index-multiple-tables-in-Apache-Solr
+https://lucidworks.com/blog/2009/11/23/solr-and-rdbms-the-basics-of-designing-your-application-for-the-best-of-both/
+https://wiki.apache.org/solr/Join
+http://stackoverflow.com/questions/12665797/is-solr-4-0-capable-of-using-join-for-multiple-core
+
+
+solr mysql confguration
+http://www.beingjavaguys.com/2013/01/how-to-use-solr-data-import-handler-to.html
+
+https://gist.github.com/maxivak/3e3ee1fca32f3949f052
+
+
+http://entropytc.com/importing-a-mysql-database-into-apache-solr/
+
+https://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/srch/configSolrconfigXml.html
+
+
+http://hortonworks.com/apache/solr/#section_1
+
+information
+https://www.howtoforge.com/tutorial/how-to-install-and-configure-solr-on-ubuntu-1604/
+
+https://wiki.apache.org/solr/Solrj
+http://lucene.apache.org/solr/6_4_0/index.html
+
+http://redrockdigimark.com/apachemirror/lucene/solr/
+
+https://github.com/spring-projects/spring-data-solr-examples/blob/master/spring-solr-repository-example/src/main/resources/org/springframework/data/solr/example/applicationContext.xml
+
+
+
+omoto@omoto-MS-7823:~/Documents/srinibackup/solrsearch/solr-6.4.1/server$ cd ..
+omoto@omoto-MS-7823:~/Documents/srinibackup/solrsearch/solr-6.4.1$ cd bin/
+omoto@omoto-MS-7823:~/Documents/srinibackup/solrsearch/solr-6.4.1/bin$ sh solr.in.sh 
+omoto@omoto-MS-7823:~/Documents/srinibackup/solrsearch/solr-6.4.1/bin$ ls
+init.d  install_solr_service.sh  oom_solr.sh  post  solr  solr.cmd  solr.in.cmd  solr.in.sh
+omoto@omoto-MS-7823:~/Documents/srinibackup/solrsearch/solr-6.4.1/bin$ sudo ./install_solr_service.sh 
+[sudo] password for omoto: 
+
+ERROR: Must specify the path to the Solr installation archive, such as solr-5.0.0.tgz
+
+
+Usage: install_solr_service.sh <path_to_solr_distribution_archive> [OPTIONS]
+
+  The first argument to the script must be a path to a Solr distribution archive, such as solr-5.0.0.tgz
+    (only .tgz or .zip are supported formats for the archive)
+
+  Supported OPTIONS include:
+
+    -d     Directory for live / writable Solr files, such as logs, pid files, and index data; defaults to /var/solr
+
+    -i     Directory to extract the Solr installation archive; defaults to /opt/
+             The specified path must exist prior to using this script.
+
+    -p     Port Solr should bind to; default is 8983
+
+    -s     Service name; defaults to solr
+
+    -u     User to own the Solr files and run the Solr process as; defaults to solr
+             This script will create the specified user account if it does not exist.
+
+    -f     Upgrade Solr. Overwrite symlink and init script of previous installation.
+
+    -n     Do not start Solr service after install, and do not abort on missing Java
+
+ NOTE: Must be run as the root user
+
+omoto@omoto-MS-7823:~/Documents/srinibackup/solrsearch/solr-6.4.1/bin$ sudo ./install_solr_service.sh /home/omoto/Documents/srinibackup/solrsearch/solr-6.4.1.zip 
+id: solr: no such user
+Creating new user: solr
+Adding system user `solr' (UID 123) ...
+Adding new group `solr' (GID 133) ...
+Adding new user `solr' (UID 123) with group `solr' ...
+Creating home directory `/var/solr' ...
+
+Extracting /home/omoto/Documents/srinibackup/solrsearch/solr-6.4.1.zip to /opt
+
+
+Installing symlink /opt/solr -> /opt/solr-6.4.1 ...
+
+
+Installing /etc/init.d/solr script ...
+
+
+Installing /etc/default/solr.in.sh ...
+
+ Adding system startup for /etc/init.d/solr ...
+   /etc/rc0.d/K20solr -> ../init.d/solr
+   /etc/rc1.d/K20solr -> ../init.d/solr
+   /etc/rc6.d/K20solr -> ../init.d/solr
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://examples.javacodegeeks.com/enterprise-java/apache-solr/solr-join-example/
+http://www.slideshare.net/lucenerevolution/grouping-and-joining-in-lucenesolr
+http://stackoverflow.com/questions/24363655/using-inner-join-in-solr-query
+http://stackoverflow.com/questions/12665797/is-solr-4-0-capable-of-using-join-for-multiple-core
+http://stackoverflow.com/questions/31343352/using-in-query-in-solr-inner-joins
+http://blog.comperiosearch.com/blog/2015/04/14/solr-indexing-index-sql-databases-made-easier-part-2/
+https://www.confluent.io/blog/using-logs-to-build-a-solid-data-infrastructure-or-why-dual-writes-are-a-bad-idea/
+https://github.com/jettro/elasticsearch-gui
+http://www.elastichq.org/
+https://github.com/royrusso/elasticsearch-HQ/commits/master
+https://github.com/royrusso/elasticsearch-HQ/blob/master/DEVELOPMENT.md
+http://curric.dlib.vt.edu/modDev/package_modules/MidtermModuleTeam1-Solr.pdf

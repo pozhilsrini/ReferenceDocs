@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar.positive {
+  fill: steelblue;
+}
+
+.bar.negative {
+  fill: brown;
+}
+
+.domain { 
+  fill: none; 
+ // stroke: black; 
+  //stroke-width; 1; 
+} 
+
+.axis text {
+  font: 10px sans-serif;
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+//var data = [-15, -20, -22, -18, 2, 6, -26, -18];
+
+var data = [{"food":"Hotdogs","quantity":24},{"food":"Tacos","quantity":290},{"food":"Pizza","quantity":-104},{"food":"Double Quarter Pounders with Cheese","quantity":-2},{"food":"Omelets","quantity":-60},{"food":"Falafel and Hummus","quantity":21},{"food":"Soylent","quantity":13}]
+
+var margin = {top: 30, right: 10, bottom: 10, left: 30},
+    width = 400 - margin.left - margin.right,
+    height = 330 - margin.top - margin.bottom;
+
+//var y0 = Math.max(Math.abs(d3.min(data, function(d) { return d.quantity; })), Math.abs(d3.max(data, function(d) { return d.quantity; })));
+
+
+
+
+
+var zero_position,yl,yu;
+	if((d3.max(data, function(d) { return d.quantity; })) <= 0) {
+		yu = 0;
+	} else  yu = (d3.max(data, function(d) { return d.quantity; }));
+	
+	if((d3.min(data, function(d) { return d.quantity; })) <= 0) {
+		yl = (d3.min(data, function(d) { return d.quantity; }))
+	} else yl = 0;
+
+	if(yu == 0) zero_position = 1;
+	else if(yl == 0) zero_position = 0;
+	else zero_position = Math.abs(yl)/((Math.abs(yl)+Math.abs(yu)));
+
+
+var x = d3.scale.ordinal().rangeRoundBands([0, width], .09)
+
+var y = d3.scale.linear()
+      .range([height, 0]);
+
+var j =12;
+x.domain(data.map(function(d) { return d.food; }));
+//y.domain([0, d3.max(data, function(d) { return d.quantity; })]);
+y.domain([yl,yu]).nice();
+/*var y = d3.scale.linear()
+    .domain([-y0, y0])
+    .range([height,0])
+    .nice();
+
+var x = d3.scale.ordinal()
+    .domain(d3.range(data.length))
+    .rangeRoundBands([0, width], .2);*/
+
+var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + (margin.top - 10) + ")");
+
+//xAxis. To put on the top, swap "(height)" with "-5" in the translate() statement. Then you'll have to change the margins above and the x,y attributes in the svgContainer.select('.x.axis') statement inside resize() below.
+var xAxis_g = svg.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(-10," + (height + margin.top + margin.bottom + 50) / 2 + ")")
+                //.attr("transform", "rotate(-20)")
+                .attr("x", function(d) {
+                    return (40 -10) /*+ x.rangeBand() / 2*/; })
+                .attr("y",-((height - 30 - 10))*zero_position)/*/2*/
+		.call(xAxis)
+		.selectAll("text")
+               //xaxis lable text rotate
+               .style("text-anchor", "start")
+               //.attr("dx", "-.6em")
+               //.attr("dy", ".15em")
+               .attr("transform", function (d) {
+                 return "rotate(30)";
+               });
+
+svg.selectAll(".bar")
+    .data(data)
+  .enter().append("rect")
+    .attr("class", function(d) { return d < 0 ? "bar negative" : "bar positive"; })
+    .attr("y", function(d) { 
+    // return y(Math.max(0, d.quantity)); })
+        if(d.quantity > 0)
+           	return y(Math.max(0, d.quantity)); 
+	   else
+             return y(Math.max(0, d.quantity)) + 20;
+		})	    
+
+     .attr("x", function(d) { 
+	return x(d.food)})
+	/*if(i>0)
+         j = j + 43; 
+console.log(j); 
+     return j; })*/
+    .attr("height", function(d) { 
+       return Math.abs(y(d.quantity) - y(0)); })
+    .attr("width", 15);
+
+svg.selectAll(".text")  		
+	  .data(data)
+	  .enter()
+	  .append("text")
+	  .attr("class","label")
+	  .attr("x", (function(d) { return x(d.food) + 5 / 2 ; }  ))
+	  .attr("y", function(d) { 
+           if(d.quantity > 0)
+           	return y(d.quantity) - 15; 
+	   else
+             return y(d.quantity) + 30;
+		})
+	  
+.attr("dy", ".75em")
+	  .text(function(d) { return d.quantity; }); 
+
+/*svg.append("g")
+    .attr("class", "x axis")
+    .call(yAxis);*/
+
+/*svg.append("g")
+    .attr("class", "y axis")
+  .append("line")
+    .attr("y1", y(0))
+    .attr("y2", y(0))
+    .attr("x1", 0)
+    .attr("x2", width);*/
+</script>

@@ -1,0 +1,24 @@
+---
+# Performance base level configuration across all servers
+
+- hosts: all
+  sudo: True
+  gather_facts: False
+ 
+  tasks:
+
+     #- name: build a war file
+      # action: command ant -buildfile /home/omoto/omotoworkspace/omotosparsh/build.xml
+
+     #- name: copy database dump file
+      # action: command scp azureuser@test3.omoto.io:/home/azureuser/dump_file.sql /home/omoto/Pictures/
+
+     
+     #- name: copy file if it exists
+      # copy: src=/home/omoto/Videos/omoto.uat.13-04-2016.forlocalserver.sql dest=/home/omoto/Pictures owner=omoto group=omoto mode=0644
+      # failed_when: false
+
+     - name: copy database dump file
+       copy: remote_src=True src=/home/omoto/srini.txt dest=/home/azureuser/
+       #delegate_to:10.112.1.113
+       

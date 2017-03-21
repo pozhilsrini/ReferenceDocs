@@ -1,0 +1,71 @@
+---
+# Performance base level configuration across all servers
+
+- hosts: all
+  sudo: True
+  gather_facts: False
+ 
+  tasks:
+
+     - name: build a war file
+       action: command ant -buildfile /home/omoto/omotoworkspace/omotosparsh/build.xml
+
+     - name: stop jboss server
+       action: command sh /home/omoto/jboss/bin/shutdown.sh -u admin -p admin state=present
+
+     - name: install zip
+       action: apt pkg=zip state=present
+
+     - name: install unzip
+       action: apt pkg=unzip state=present
+
+     - name: install curl 
+       action: apt pkg=curl state=present
+
+     - name: install Python setuptools
+       action: apt pkg=python-setuptools state=present
+
+     - name: install Python module - keyring
+       easy_install: name=keyring
+
+     - name: install Python module - requests
+       easy_install: name=requests
+
+     - name: run jboss server
+       action: command nohup /home/omoto/jboss/bin/run.sh & state=present
+
+     - name: Install MySQL
+       action: apt name={{item}}
+       with_items:
+        - mysql-server
+        - python-mysqldb
+    
+     - name: Start the MySQL service
+       action: service name=mysql state=started
+
+     - name: Remove the omoto database
+       mysql_db: name=omoto state=absent login_user='root' login_password='omoto'
+
+     - name: Create database
+       mysql_db: name=omoto state=present login_user='root' login_password='omoto'
+
+     #- name: copy file if it exists
+      # copy: src=/home/omoto/Videos/omoto.uat.13-04-2016.forlocalserver.sql dest=/home/omoto/Pictures owner=omoto group=omoto mode=0644
+      # failed_when: false
+
+     - name: Run SQL commands against DB to create table
+       mysql_db:
+        login_host: 'localhost'
+        login_password: 'omoto'
+        login_user: 'root'
+        login_port: "3306"
+        name: omoto
+        state: import
+        target: "/home/omoto/Pictures/omoto.21.04.2015.sql"
+
+     #- name: copy file if it exists
+      # copy: src=/home/omoto/omotoworkspace/latestomoto/deploy/omoto.war dest=/home/omoto/Pictures owner=omoto group=omoto mode=0644
+      # failed_when: false
+        
+        
+ 

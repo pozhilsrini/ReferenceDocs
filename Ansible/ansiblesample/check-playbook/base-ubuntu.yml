@@ -1,0 +1,15 @@
+---
+# Performance base level configuration across all servers
+
+- hosts: all
+  sudo: True
+  gather_facts: False
+ 
+  tasks:
+
+     - name: install curl 
+       action: apt pkg=curl state=present
+
+    
+        
+ 

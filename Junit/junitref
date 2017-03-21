@@ -1,0 +1,8 @@
+
+https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4
+http://stackoverflow.com/questions/29053974/how-to-write-a-unit-test-for-a-spring-boot-controller-endpoint
+https://dzone.com/articles/spring-boot-configurationproperties-1
+http://stackoverflow.com/questions/29669393/override-default-spring-boot-application-properties-settings-in-junit-test
+http://stackoverflow.com/questions/32974432/spring-junit-testing-properties-file
+http://stackoverflow.com/questions/28571848/spring-boot-jpa-insert-in-table-with-uppercase-name-with-hibernate
+https://github.com/spring-projects/spring-boot/blob/v1.4.0.M2/spring-boot-samples/spring-boot-sample-test/src/test/java/sample/test/service/VehicleDetailsJsonTests.java

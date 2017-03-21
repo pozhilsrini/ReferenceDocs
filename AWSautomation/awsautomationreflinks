@@ -1,0 +1,24 @@
+http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
+http://boto.cloudhackers.com/en/latest/s3_tut.html
+http://stackoverflow.com/questions/36205481/read-file-content-from-s3-bucket-with-boto3
+https://dzone.com/articles/file-handling-in-amazon-s3-with-python-boto-librar
+http://www.laurentluce.com/posts/upload-and-download-files-tofrom-amazon-s3-using-pythondjango/
+http://docs.ceph.com/docs/jewel/radosgw/s3/python/
+http://www.dowdandassociates.com/blog/content/howto-install-aws-cli-security-credentials/
+http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+http://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html#v2-RESTBucketGET-responses-examples
+http://www.bucketexplorer.com/documentation/amazon-s3--list-s3-buckets-get-service.html
+
+https://developer.domo.com/docs/domo-apis/data#API%20-%20List%20DataSets
+https://developer.domo.com/manage-domo
+https://developer.domo.com/new-client
+https://developer.domo.com/docs/domo-apis/authentication
+https://developer.domo.com/docs/domo-apis/authentication
+
+
+
+
+working code 
+https://github.com/aws/aws-sdk-java/blob/master/src/samples/AmazonS3/S3Sample.java
+https://javatutorial.net/java-s3-example

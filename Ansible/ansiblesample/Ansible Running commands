@@ -1,0 +1,5 @@
+/Documents/srinibackup/ansiblesample/check-playbook$ ansible-playbook -i ../sample.hosts  base-ubuntu.yml --ask-sudo-pass
+sudo password: 
+
+
+

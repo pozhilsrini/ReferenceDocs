@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #fff;
+
+  }
+.axis text {
+  	font-size: 13px;
+  }
+.bar {
+    fill: #8CD3DD;
+  }
+.bar:hover {
+    fill: #F56C4E;
+  }
+svg text.label {
+  fill:#F56C4E;
+  font: 15px;  
+  font-weight: 400;
+  text-anchor: middle;
+}
+#chartID {
+	min-width: 531px;
+}
+
+</style>
+<body>
+<div id ="chartID"></div>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+
+var causes = ["quantity", "quanlity"];
+
+var data = [{"food":"Hotdogs","quantity":24, "quanlity":24},{"food":"Tacos","quantity":90, "quanlity":44},{"food":"Pizza","quantity":40, "quanlity":54}]
+
+var margin = {top:20, right:20, bottom:90, left:30};
+
+var width = 560 - margin.left - margin.right;
+
+var height = 400 - margin.top - margin.bottom ;
+
+var xScale = d3.scale.ordinal().rangeRoundBands([0, width])
+//stacked barchart color
+var z = d3.scale.category10();
+
+
+
+ var layers = d3.layout.stack()(causes.map(function(c) {
+    return data.map(function(d) {
+      return {x: d.food, y: d[c]};
+    });
+  }));
+
+var yScale = d3.scale.linear()
+      .range([height, 0]);
+
+
+var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom");
+      
+      
+var yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient("left");
+//create a svg container
+var svgContainer = d3.select("body").append("svg")
+		.attr("width", width+margin.left + margin.right)
+		.attr("height",height+margin.top + margin.bottom)
+		.append("g").attr("class", "container")
+		.attr("transform", "translate("+ margin.left +","+ margin.top +")");
+
+
+//stacked bar chart configuration
+  xScale.domain(layers[0].map(function(d) { return d.x; }));
+  yScale.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
+
+//this is normal chart configuartion
+/*xScale.domain(data.map(function(d) { return d.food; }));
+
+yScale.domain([0, d3.max(data, function(d) { return d.quantity; })]);*/
+
+
+//xAxis. To put on the top, swap "(height)" with "-5" in the translate() statement. Then you'll have to change the margins above and the x,y attributes in the svgContainer.select('.x.axis') statement inside resize() below.
+var xAxis_g = svgContainer.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(-40," + (height + 20) + ")")
+                //.attr("transform", "rotate(-20)")
+		.call(xAxis)
+		.selectAll("text")
+               //xaxis lable text rotate
+               .style("text-anchor", "middle")
+               .attr("dx", "-.6em")
+               .attr("dy", ".15em")
+               .attr("transform", function (d) {
+                 return "rotate(30)";
+               });
+                  
+               
+			
+// Uncomment this block if you want the y axis
+/*var yAxis_g = svgContainer.append("g")
+		.attr("class", "y axis")
+		.call(yAxis)
+		.append("text")
+		//.attr("transform", "rotate(-90)")
+		.attr("y", 6).attr("dy", ".71em")
+		//.style("text-anchor", "end").text("Number of Applicatons"); */
+
+
+ var layer = svgContainer.selectAll(".layer")
+      .data(layers)
+    .enter().append("g")
+      .attr("class", "layer")
+      .style("fill", function(d, i) { return z(i); });
+  layer.selectAll("rect")
+      .data(function(d) {
+	 return d; 
+	})
+    .enter().append("rect")
+      .attr("x", function(d) { return xScale(d.x); })
+      .attr("y", function(d) { return yScale(d.y + d.y0); })
+      .attr("height", function(d) { return yScale(d.y0) - yScale(d.y + d.y0); })
+      .attr("width", 13);
+
+
+//single bar configuration
+
+	/*svgContainer.selectAll(".bar")
+  		.data(data)
+  		.enter()
+  		.append("rect")
+  		.attr("class", "bar")
+  		.attr("x", function(d) { return xScale(d.food); })
+  		.attr("width", 15)
+  		.attr("y", function(d) { return yScale(d.quantity); })
+  		.attr("height", function(d) { return height - yScale(d.quantity); });*/
+
+// Controls the text labels at the top of each bar. Partially repeated in the resize() function below for responsiveness.
+	layer.selectAll(".text")  		
+	 .data(data)
+	  .enter()
+	  .append("text")
+	  .attr("class","label")
+	  .attr("x", function(d) { 
+          return xScale(d.food) + 5; 
+           })
+           .attr("y", function(d) { return yScale(d.quantity + d.quanlity) - 15; })
+	  .attr("dy", ".75em")
+	  .text(function(d) { return d.quanlity; }); 
+
+
+
+</script>

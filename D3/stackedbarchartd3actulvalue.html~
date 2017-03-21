@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar.positive {
+  fill: steelblue;
+}
+
+.bar.negative {
+  fill: brown;
+}
+
+.domain { 
+  fill: none; 
+ // stroke: black; 
+  //stroke-width; 1; 
+} 
+
+.axis text {
+  font: 10px sans-serif;
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+//var data = [-15, -20, -22, -18, 2, 6, -26, -18];
+
+ var npsLabels = [ "detractor", "passive", "promotor" ];
+
+var causes = ["total"];
+
+				//var data = [{"food":"Hotdogs","quantity":24},{"food":"Tacos","quantity":290},{"food":"Pizza","quantity":-104},{"food":"Double Quarter Pounders with Cheese","quantity":-2},{"food":"Omelets","quantity":-60},{"food":"Falafel and Hummus","quantity":21},{"food":"Soylent","quantity":13}]
+
+				var data  = [{"X":"2017-01-28","detractor":7,"passives":7,"promoter":20,"total":34},
+				            {"X":"2017-01-29","detractor":7,"passives":7,"promoter":20,"total":55},
+							{"X":"2017-01-30","detractor":7,"passives":7,"promoter":20,"total":65},
+							{"X":"2017-01-31","detractor":7,"passives":7,"promoter":20,"total":75},
+							{"X":"2017-02-1","detractor":7,"passives":7,"promoter":20,"total":45},
+							{"X":"2017-02-2","detractor":7,"passives":7,"promoter":20,"total":45},
+							{"X":"2017-02-3","detractor":7,"passives":7,"promoter":20,"total":67}]
+
+
+				var margin = {top: 30, right: 10, bottom: 10, left: 30};
+   					
+				 var XAXIS_TRANSFORM = -15;
+			     var GRAPH_TRANSFORM = margin.left;
+
+			  var layers = d3.layout.stack()(causes.map(function(c) {
+					    return data.map(function(d) {
+					      return {x: d.X, y: d[c]};
+					    });
+					  }));
+
+
+				 //based on data scrollable will enabled	
+			var w = 65*data.length;
+				if(w < 400) w = 450;
+					
+		   	 var DETRACTOR=0, PASSIVE=0, PROMOTOR=0, NPS=0;	
+
+			 var BAR_WIDTH = 15;	
+
+             		var width = w - margin.left - margin.right;
+
+             		var height = 300 - margin.top - margin.bottom ;
+
+            		 var xScale = d3.scale.ordinal().rangeRoundBands([0, width], .05)
+
+			 var yScale = d3.scale.linear().range([height, 0]);
+
+			 var barColor = d3.scale.ordinal().range([ "#f8655e","#bcc1c5","#a2ded0" ]);
+		   
+
+//var y0 = Math.max(Math.abs(d3.min(data, function(d) { return d.quantity; })), Math.abs(d3.max(data, function(d) { return d.quantity; })));
+
+
+			var zero_position,yl,yu;
+			if((d3.max(layers[layers.length - 1], function(d) { return d.y+d.y0; })) <= 0) {
+				yu = 0;
+			} else  yu = d3.max(layers[layers.length - 1], function(d) { return d.y+d.y0; });
+			
+			if((d3.min(layers[layers.length - 1], function(d) { return d.y+d.y0; })) <= 0) {
+				yl = d3.min(layers[layers.length - 1], function(d) { return d.y+d.y0; })
+			} else yl = 0;
+
+			if(yu == 0) zero_position = 1;
+			else if(yl == 0) zero_position = 0;
+			else zero_position = Math.abs(yl)/((Math.abs(yl)+Math.abs(yu)));
+
+
+			var x = d3.scale.ordinal().rangeRoundBands([0, width], .09)
+
+			var y = d3.scale.linear()
+				.range([height, 0]);
+
+			var j =12;
+
+			x.domain(data.map(function(d) { return d.X; }));
+			y.domain([yl,yu]).nice();
+
+			var xAxis = d3.svg.axis()
+					.scale(x)
+					.orient("bottom");
+
+			var yAxis = d3.svg.axis()
+				.scale(y)
+				.orient("left");
+
+
+
+				var map = {}, tempMap = [];
+        			var nps;
+				    for(var key in data) {
+						
+						var promoter,passive,detractor; 
+						if(data[key].total != 0) { nps = (((data[key].promoter*100)/data[key].total)-((data[key].detractor*100)/data[key].total));
+						} else { nps=0; data[key].total = 1; }
+						
+						
+						if(nps != 0){
+							promoter  = (nps * data[key].promoter)/(data[key].total);
+							detractor = (nps * data[key].detractor)/(data[key].total);
+							passive   = nps - (promoter + detractor);
+						}else{
+							promoter  = (nps + data[key].promoter)/(data[key].total);
+							detractor = (nps + data[key].detractor)/(data[key].total);
+							passive = (nps + data[key].passives)/(data[key].total);
+
+							if(promoter !=0 && detractor !=0 && passive !=0){
+								passive   = nps - (promoter + detractor);
+							}
+							else
+								passive = (nps + data[key].passives)/(data[key].total);
+
+							if(promoter !=0 && detractor !=0 && passive ==0){
+								passive   = nps - (promoter - detractor);
+							}
+						}	
+						//console.log("date and day format"+data[key].X);
+	
+						tempMap[key]={'X': data[key].X,'detractor': detractor,'passive': passive,'promoter': promoter};
+				    }
+
+					var layers = d3.layout.stack()(["detractor","passive","promoter"].map(function(position){
+						return tempMap.map(function(d) {
+		    				
+							
+					   return { x:d.X, y: +d[position]};
+		    			});
+		    		}));
+
+
+
+            //------------------------Views Starting--------------------------
+		   
+				//create a svg container
+				/*var svgContainer = d3.select(elem[0]).append("svg")
+						.attr("width", width+margin.left + margin.right)
+						.attr("height",height+margin.top + margin.bottom)
+						.append("g")
+						.attr("transform", "translate("+ GRAPH_TRANSFORM +","+ margin.top - 10 +")");*/
+
+
+					var svgContainer = d3.select("body").append("svg")
+							.attr("width", width + margin.left + margin.right)
+							.attr("height", height + margin.top + margin.bottom)
+							.append("g")
+							.attr("transform", "translate(" + GRAPH_TRANSFORM + "," + (margin.top - 10) + ")");
+			 
+			 
+			 //-----------SORT THE DATE IN ASCENDING ORDER		
+			
+		       //var data =  scope.npschartdetails.data;
+
+
+
+			/*var svg = d3.select(elem[0]).append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+			.append("g")
+				.attr("transform", "translate(" + margin.left + "," + (margin.top - 10) + ")");*/
+
+			//xAxis. To put on the top, swap "(height)" with "-5" in the translate() statement. Then you'll have to change the margins above and the x,y attributes in the svgContainer.select('.x.axis') statement inside resize() below.
+			var xAxis_g = svgContainer.append("g")
+					.attr("class", "x axis")
+					.attr("transform", "translate(-15," + (height - 10) / 2 + ")")
+							//.attr("transform", "rotate(-20)")
+							.attr("x", function(d) {
+								return (40 -10) /*+ x.rangeBand() / 2*/; })
+							.attr("y",-((height - 30 - 10))*zero_position)/*/2*/
+					.call(xAxis)
+					.selectAll("text")
+						//xaxis lable text rotate
+						.style("text-anchor", "start")
+						//.attr("dx", "-.6em")
+						//.attr("dy", ".15em")
+						.attr("transform", function (d) {
+							return "rotate(30)";
+						});
+
+
+
+			// stacked bar configuration
+			/*var layer = svgContainer.selectAll(".bar")
+								.data(data)
+								.enter().append("g")
+								.attr("class", "bar")
+								.style("fill", function(d, i) { return barColor(i); })
+								.style("stroke", function(d, i) { return barColor(i); });
+
+
+				layer.selectAll("bar")
+				.data(function(d) { return d; })
+				.enter().append("rect")
+				.attr("x", function(d) { return x(d.x); })
+      				.attr("y", function(d) { return y(d.y + d.y0); })
+     				 .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+				.attr("width", BAR_WIDTH)*/
+
+
+					var layer = svgContainer.selectAll(".bar")
+								.data(layers)
+								.enter().append("g")
+								.attr("class", "bar")
+								.style("fill", function(d, i) { return barColor(i); });
+								//.style("stroke", function(d, i) { return barColor(i); });			
+						
+
+			layer.selectAll("bar")
+				.data(function(d) { return d; })
+			.enter().append("rect")
+			.style("fill", function(d, i) { return barColor(i); })
+				//.attr("class", function(d) { return d < 0 ? "bar negative" : "bar positive"; })
+
+				.attr("x", function(d) { 
+					return x(d.x); })
+      				.attr("y", function(d) { return y(55) })
+			.attr("height", function(d) { return y(0) - y(d.y) })
+				/*.attr("y", function(d) { 
+				
+					if(d.total > 0)
+						return y(Math.max(0, d.total)); 
+				else
+						return y(Math.max(0, d.total)) + 20;
+					})	    
+
+				.attr("x", function(d) { 
+				return x(d.X)})
+				
+				.attr("height", function(d) { 
+				return Math.abs(y(d.total) - y(0)); })*/
+				.attr("width", 15);
+
+			
+			/*svgContainer.selectAll(".text")  		
+				.data(data)
+				.enter()
+				.append("text")
+				.attr("class","label")
+				.attr("x", (function(d) { return x(d.X) + 5 / 2 ; }  ))
+				.attr("y", function(d) { 
+					if(d.total > 0)
+						return y(d.total) - 15; 
+				else
+						return y(d.total) + 30;
+					})
+				
+			.attr("dy", ".75em")
+				.text(function(d) { return d.total; }); */	
+</script>
